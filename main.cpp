@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <cctype>
+#include <sstream>
 
 #include "ArrayStack.h"
 
@@ -18,8 +19,17 @@ struct Token {
 
 vector<Token> tokenize(const string& line) {
     vector<Token> tokens;
-    // TODO
-    return tokens;
+
+    stringstream ss(line);
+
+    string temp;
+
+    while (getline(ss, temp, ' '))
+    {
+        tokens.push_back(Token(temp));
+    }
+
+        return tokens;
 }
 
 // Helpers
@@ -66,6 +76,13 @@ double evalPostfix(const vector<Token>& tokens) {
 int main() {
     string line;
     getline(cin, line);
+
+    line = "3 + 4 * 2"; //testing
+
+    for (const auto& token : tokenize(line)) //testing
+        {
+            cout << token.value << " ";
+        }
 
     vector<Token> tokens = tokenize(line);
 
