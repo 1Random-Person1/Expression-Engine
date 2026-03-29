@@ -38,15 +38,48 @@ bool isOperator(const string& s) {
     return s == "+" || s == "-" || s == "*" || s == "/";
 }
 
-int precedence(const string& op) {
-    // TODO
+int precedence(const string& op)
+{
+
+    if (op == "(")
+    {
+        return 4;
+    }
+
+    if (op == ")")
+    {
+        return 3;
+    }
+
+    if (op == "*" || op == "/")
+    {
+        return 2;
+    }
+
+    if (op == "+" || op == "-")
+    {
+        return 1;
+    }
+
     return 0;
 }
 
 // Detection
 
 bool isValidPostfix(const vector<Token>& tokens) {
-    // TODO
+
+    while (tokens.size() > 0)
+    {
+        if (tokens.front().value == "*" || tokens.front().value == "/"
+            || tokens.front().value == "+" || tokens.front().value == "-")
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -76,13 +109,6 @@ double evalPostfix(const vector<Token>& tokens) {
 int main() {
     string line;
     getline(cin, line);
-
-    line = "3 + 4 * 2"; //testing
-
-    for (const auto& token : tokenize(line)) //testing
-        {
-            cout << token.value << " ";
-        }
 
     vector<Token> tokens = tokenize(line);
 
