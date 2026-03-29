@@ -68,19 +68,24 @@ int precedence(const string& op)
 
 bool isValidPostfix(const vector<Token>& tokens) {
 
-    while (tokens.size() > 0)
+    int counter = 0;
+
+    for (int i = 0; i < tokens.size(); i++)
     {
-        if (tokens.front().value == "*" || tokens.front().value == "/"
-            || tokens.front().value == "+" || tokens.front().value == "-")
+
+        if (isdigit(tokens[i].value[0]))
         {
+            counter++;
+
+        } else if (isOperator(tokens[i].value) && counter < 2)
+        {
+
             return false;
-        } else
-        {
-            return true;
         }
+
     }
 
-    return false;
+    return true;
 }
 
 bool isValidInfix(const vector<Token>& tokens) {
