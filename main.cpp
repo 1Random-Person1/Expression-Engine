@@ -77,15 +77,20 @@ bool isValidPostfix(const vector<Token>& tokens) {
         {
             counter++;
 
-        } else if (isOperator(tokens[i].value) && counter < 2)
+        } else if (isOperator(tokens[i].value))
         {
 
-            return false;
+            if (counter < 2)
+            {
+                return false;
+            }
+
+            counter--;
         }
 
     }
 
-    return true;
+    return counter == 1;
 }
 
 bool isValidInfix(const vector<Token>& tokens) {
