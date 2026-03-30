@@ -94,8 +94,42 @@ bool isValidPostfix(const vector<Token>& tokens) {
 }
 
 bool isValidInfix(const vector<Token>& tokens) {
-    // TODO
-    return false;
+
+    if (tokens.size() % 2 == 0)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < tokens.size(); i++)
+    {
+
+        if (i % 2 == 0)
+        {
+
+            if (isOperator(tokens[i].value))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
+        if (i % 2 == 1)
+        {
+
+            if (isdigit(tokens[i].value[0]))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
+    }
+
+    return true;
 }
 
 // Conversion
