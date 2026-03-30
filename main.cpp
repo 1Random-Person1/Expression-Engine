@@ -100,36 +100,63 @@ bool isValidInfix(const vector<Token>& tokens) {
         return false;
     }
 
+    bool nextIsOp = false;
+
+    int counter = 0;
+
     for (int i = 0; i < tokens.size(); i++)
     {
 
-        if (i % 2 == 0)
+        if (isdigit(tokens[i].value[0]))
         {
 
-            if (isOperator(tokens[i].value))
+            if (nextIsOp)
             {
                 return false;
             }
 
-            return true;
+            nextIsOp = true;
 
         }
 
-        if (i % 2 == 1)
+        else if (isOperator(tokens[i].value))
         {
 
-            if (isdigit(tokens[i].value[0]))
+            if (!nextIsOp)
             {
                 return false;
             }
 
-            return true;
+            nextIsOp = false;
 
+        }
+
+        else if (tokens[i].value == "(")
+        {
+
+            if (nextIsOp)
+            {
+                return false;
+            }
+
+            counter++;
+
+        }
+
+        else if (tokens[i].value == ")")
+        {
+
+            if (!nextIsOp)
+            {
+                return false;
+            }
+
+            counter--;
         }
 
     }
 
-    return true;
+    return nextIsOp && counter == 0;
 }
 
 // Conversion
