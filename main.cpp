@@ -190,18 +190,27 @@ double evalPostfix(const vector<Token>& tokens) {
             stack.pop();
 
 
-            if (precedence(tokens[i].value) == 1)
+            if (tokens[i].value == "+")
             {
 
                 stack.push(numBot + numTop);
 
-            } else if (precedence(tokens[i].value) == 2)
+            } else if (tokens[i].value == "-")
+            {
+
+                stack.push(numBot - numTop);
+
+            } else if (tokens[i].value == "*")
             {
 
                 stack.push(numBot * numTop);
 
-            }
+            } else if (tokens[i].value == "/")
+            {
 
+                stack.push(numBot / numTop);
+
+            }
 
         }
 
@@ -209,7 +218,6 @@ double evalPostfix(const vector<Token>& tokens) {
 
     return stack.top();
 }
-
 
 // Main
 
