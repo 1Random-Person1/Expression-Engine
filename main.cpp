@@ -171,8 +171,31 @@ vector<Token> infixToPostfix(const vector<Token>& tokens) {
 
 double evalPostfix(const vector<Token>& tokens) {
     ArrayStack<double> stack;
-    // TODO
-    return 0.0;
+
+    for (int i = 0; i < tokens.size(); i++)
+    {
+
+        int num1 = stack.top();
+        stack.pop();
+
+        int num2 = stack.top();
+        stack.pop();
+
+        if (precedence(tokens[i].value) == 1)
+        {
+
+            stack.push(num1 + num2);
+
+        } else if (precedence(tokens[i].value) == 2)
+        {
+
+            stack.push(num1 * num2);
+
+        }
+
+    }
+
+    return stack.top();
 }
 
 // Main
