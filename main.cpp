@@ -175,21 +175,33 @@ double evalPostfix(const vector<Token>& tokens) {
     for (int i = 0; i < tokens.size(); i++)
     {
 
-        int num1 = stack.top();
-        stack.pop();
-
-        int num2 = stack.top();
-        stack.pop();
-
-        if (precedence(tokens[i].value) == 1)
+        if (isdigit(tokens[i].value[0]))
         {
 
-            stack.push(num1 + num2);
+            stack.push(stoi(tokens[i].value));
 
-        } else if (precedence(tokens[i].value) == 2)
+        } else if (isOperator(tokens[i].value))
         {
 
-            stack.push(num1 * num2);
+            double numTop = stack.top();
+            stack.pop();
+
+            double numBot = stack.top();
+            stack.pop();
+
+
+            if (precedence(tokens[i].value) == 1)
+            {
+
+                stack.push(numBot + numTop);
+
+            } else if (precedence(tokens[i].value) == 2)
+            {
+
+                stack.push(numBot * numTop);
+
+            }
+
 
         }
 
