@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <cctype>
 #include <sstream>
+#include <stack>
 
 #include "ArrayStack.h"
 
@@ -163,7 +164,34 @@ bool isValidInfix(const vector<Token>& tokens) {
 
 vector<Token> infixToPostfix(const vector<Token>& tokens) {
     vector<Token> output;
-    // TODO
+
+    stack<Token> tempStack;
+
+    for (int i = 0; i < tokens.size(); i++)
+    {
+
+        if (isdigit(tokens[i].value[0]))
+        {
+
+            output.push_back(tokens[i]);
+
+        } else if (isOperator(tokens[i].value))
+        {
+
+            while (!tempStack.empty() && precedence(tokens[i].value) <=
+                precedence(tempStack.top().value))
+            {
+                output.push_back(tokens[i]);
+                tempStack.pop();
+
+            }
+
+            tempStack.push(tokens[i]);
+
+        }
+
+    }
+
     return output;
 }
 
