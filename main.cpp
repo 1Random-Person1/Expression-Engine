@@ -42,16 +42,6 @@ bool isOperator(const string& s) {
 int precedence(const string& op)
 {
 
-    if (op == "(")
-    {
-        return 4;
-    }
-
-    if (op == ")")
-    {
-        return 3;
-    }
-
     if (op == "*" || op == "/")
     {
         return 2;
@@ -188,6 +178,24 @@ vector<Token> infixToPostfix(const vector<Token>& tokens) {
             }
 
             tempStack.push(tokens[i]);
+
+        } else if (tokens[i].value == "(")
+        {
+
+            tempStack.push(tokens[i]);
+
+        } else if (tokens[i].value == ")")
+        {
+
+            while (tempStack.top().value != "(")
+            {
+
+                output.push_back(tempStack.top());
+                tempStack.pop();
+
+            }
+
+            tempStack.pop();
 
         }
 

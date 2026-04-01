@@ -22,7 +22,7 @@ public:
 
         if (data.empty())
         {
-            cout << "ArrayStack is empty" << endl;
+            cout << "ArrayStack is empty 1" << endl;
         } else
         {
             data.pop_back();
@@ -34,7 +34,7 @@ public:
 
         if (data.empty())
         {
-            cout << "ArrayStack is empty" << endl;
+            cout << "ArrayStack is empty 2" << endl;
         } else
         {
             return data.back();
@@ -58,7 +58,7 @@ public:
 
         if (data.empty())
         {
-            cout << "ArrayStack is empty" << endl;
+            cout << "ArrayStack is empty 3" << endl;
         } else
         {
             return data.size();
