@@ -191,12 +191,12 @@ vector<Token> infixToPostfix(const vector<Token>& tokens) {
 
         }
 
-        while (!tempStack.empty())
-        {
-            output.push_back(tempStack.top());
-            tempStack.pop();
-        }
+    }
 
+    while (!tempStack.empty())
+    {
+        output.push_back(tempStack.top());
+        tempStack.pop();
     }
 
     return output;
